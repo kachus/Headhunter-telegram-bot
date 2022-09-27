@@ -21,7 +21,7 @@ KEY, DATE, FIN = range(3)
 def start(update: Update, context: CallbackContext) -> int:
     """Starts the conversation and asks the user about their gender."""
 
-    update.message.reply_text('*This is hh bot*', parse_mode='MarkdownV2', reply_markup=ReplyKeyboardRemove())
+    update.message.reply_text('*This is HH bot*', parse_mode='MarkdownV2', reply_markup=ReplyKeyboardRemove())
     """Starts the conversation and asks for key words"""
 
     update.message.reply_text('Please enter the keywords', reply_markup=ReplyKeyboardRemove())
