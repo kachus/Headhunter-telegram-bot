@@ -17,6 +17,10 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 KEY, DATE, FIN = range(3)
+def continue_entry_point(update: Update, context: CallbackContext) -> int:
+    update.message.reply_text('Please enter the keywords', reply_markup=ReplyKeyboardRemove())
+    return KEY
+
 
 def start(update: Update, context: CallbackContext) -> int:
     """Starts the conversation and asks the user about their gender."""
@@ -45,7 +49,6 @@ def get_date_range(update: Update, context: CallbackContext) -> int:
     with open ("/Users/Evgenia/Desktop/date_range.txt", 'w') as f:
         f.write(update.message.text)
     vacancies = hh_parser.get_vacancies()
-    print(type(vacancies))
     if len(vacancies) == 0:
         update.message.reply_text('no available vacancies', reply_markup=ReplyKeyboardRemove())
     else:
@@ -72,7 +75,7 @@ def main() -> None:
 
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
     conv_handler = ConversationHandler(
-        entry_points=[CommandHandler('start', start)],
+        entry_points=[CommandHandler('start', start), CommandHandler('continue', continue_entry_point)],
         states = {KEY: [MessageHandler(Filters.text & ~Filters.command, get_key_words)],
                   FIN: [MessageHandler(Filters.regex('^(1 week|2 weeks|1 day)$'), get_date_range)],
                   DATE: [MessageHandler(Filters.text & ~Filters.command, cancel)],
