@@ -33,7 +33,7 @@ def start(update: Update, context: CallbackContext) -> int:
 
 def get_key_words(update: Update, context: CallbackContext) -> int:
     logger.info("keywords: %s", update.message.text)
-    with open("/Users/Evgenia/Desktop/keywords.txt", 'w') as f:
+    with open("keywords.txt", 'w') as f:
         f.write(update.message.text + " ")
     reply_keyboard = [['1 week', '2 weeks', '1 day']]
     update.message.reply_text(
@@ -46,7 +46,7 @@ def get_key_words(update: Update, context: CallbackContext) -> int:
 
 def get_date_range(update: Update, context: CallbackContext) -> int:
     logger.info("Date range: %s", update.message.text)
-    with open ("/Users/Evgenia/Desktop/date_range.txt", 'w') as f:
+    with open ("date_range.txt", 'w') as f:
         f.write(update.message.text)
     vacancies = hh_parser.get_vacancies()
     if len(vacancies) == 0:

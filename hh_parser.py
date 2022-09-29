@@ -7,21 +7,30 @@ from datetime import date, timedelta
 
 from bs4 import BeautifulSoup
 
-
+'''''
 def remove_tags(string):
     markup = string
     soup = BeautifulSoup(markup, 'html.parser')
-    return soup.get_text()
+    return 
+'''''
+
+def remove_tags_new(string):
+    markup = string
+    try:
+        clear_data = BeautifulSoup(markup,features= "html.parser").text
+    except:
+        return ''
+    return clear_data
 
 def get_key_words() -> str:
-    with open("/Users/Evgenia/Desktop/keywords.txt", 'r') as f:
+    with open("keywords.txt", 'r') as f:
         for line in f:
             keywords = line.strip()
         return str(keywords)
 
 def get_daterange():
     date_to = date.today()
-    with open("/Users/Evgenia/Desktop/date_range.txt", 'r') as f:
+    with open("date_range.txt", 'r') as f:
         for line in f:
             daterange = line.strip()
         if daterange == '2 weeks':
@@ -58,8 +67,8 @@ def get_vacancies()  -> list:
         salary_from = vacancy['salary']['from']
         salary_to = vacancy['salary']['to']
         url = vacancy['alternate_url']
-        requirement = remove_tags(vacancy['snippet']['requirement'])
-        responsibility = remove_tags(vacancy['snippet']['responsibility'])
+        requirement = remove_tags_new(vacancy['snippet']['requirement'])
+        responsibility = remove_tags_new(vacancy['snippet']['responsibility'])
         employer_name = vacancy['employer']['name']
         employer_link = vacancy['employer']['alternate_url']
         answer = f'Bакансия: {vacancy_name} ' \
@@ -75,3 +84,5 @@ def get_vacancies()  -> list:
 
     return answers
     #return json.dumps(answer, ensure_ascii=False)
+
+
