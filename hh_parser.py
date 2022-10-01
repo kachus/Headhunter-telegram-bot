@@ -1,18 +1,10 @@
 import requests
 import json
-import json
 import logging
 from datetime import date, timedelta
 
 
 from bs4 import BeautifulSoup
-
-'''''
-def remove_tags(string):
-    markup = string
-    soup = BeautifulSoup(markup, 'html.parser')
-    return 
-'''''
 
 def remove_tags_new(string):
     markup = string
